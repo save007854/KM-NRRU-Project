@@ -1,0 +1,26 @@
+.cke_textarea_inline{
+	border: 1px solid black;
+ }
+ .container { 
+    max-width:70%; 
+    margin: 0 auto;
+}
+
+.input-field{
+    padding:10px;
+}
+
+.input-field label{
+    display: block;
+    font-size:20px; 
+    margin-left:-8;
+    font-weight: 300;
+    color:gray;
+}
+
+.input-field input[type='text']{
+    width:100%; 
+    padding:5px;
+    margin-left:-8; 
+    font-size: 16px;
+}

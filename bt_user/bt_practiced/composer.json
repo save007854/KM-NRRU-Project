@@ -1,0 +1,12 @@
+{
+    "name": "enter1130/php",
+    "require": {
+        "wixel/gump": "^1.12",
+        "laminas/laminas-escaper": "^2.9"
+    },
+    "autoload": {
+        "classmap": [
+            "classes"
+        ]
+    }
+}
