@@ -1,8 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_IMAGE = 'your-php-app-image'
     }
 
     stages {
@@ -31,4 +29,4 @@ pipeline {
             }
         }
     }
-}
+
