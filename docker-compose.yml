@@ -3,7 +3,7 @@ services:
     www:
         build: .
         ports:
-            - "71:70"
+            - "60:60"
         volumes:
             - ./www:/var/www/html/
         links:
@@ -29,7 +29,7 @@ services:
         links:
             - db:db
         ports:
-            - 71:70
+            - 70:70
         environment:
             MYSQL_USER: root
             MYSQL_PASSWORD: null
