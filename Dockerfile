@@ -5,7 +5,7 @@ FROM php:7.4-apache
 WORKDIR /var/www/html
 
 # Copy the current directory contents into the container at /var/www/html
-COPY . /var/www/html
+COPY . .
 
 # Install any needed extensions
 RUN docker-php-ext-install mysqli
