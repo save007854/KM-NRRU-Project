@@ -17,10 +17,10 @@ services:
         environment:
             MYSQL_DATABASE: bestpractice
             MYSQL_USER: root
-            MYSQL_PASSWORD: 
-            MYSQL_ROOT_PASSWORD: 
+            MYSQL_PASSWORD: null
+            MYSQL_ROOT_PASSWORD: null
         volumes:
-            - ./dump:/docker-entrypoint-initdb.d
+            - ./slq:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
             - default
@@ -29,11 +29,11 @@ services:
         links:
             - db:db
         ports:
-            - 82:80
+            - 70:70
         environment:
             MYSQL_USER: root
-            MYSQL_PASSWORD: 
-            MYSQL_ROOT_PASSWORD: 
+            MYSQL_PASSWORD: null
+            MYSQL_ROOT_PASSWORD: null
 volumes:
     persistent:
 
