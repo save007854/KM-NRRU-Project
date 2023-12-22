@@ -1,4 +1,3 @@
----
 version: "2"
 services:
     www:
@@ -21,7 +20,7 @@ services:
             MYSQL_PASSWORD: 
             MYSQL_ROOT_PASSWORD: 
         volumes:
-            - ./sql:/docker-entrypoint-initdb.d
+            - ./dump:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
             - default
@@ -34,8 +33,7 @@ services:
         environment:
             MYSQL_USER: root
             MYSQL_PASSWORD: 
-            MYSQL_ROOT_PASSWORD:
-    php-app: 
-        image: your-php-image
-        volumes:
-            - ./path/on/host:/path/in/container
+            MYSQL_ROOT_PASSWORD: 
+volumes:
+    persistent:
+
