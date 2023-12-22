@@ -8,7 +8,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Install any needed extensions
-RUN docker-php-ext-install mysqli pdo_mysql
+RUN docker-php-ext-install mysqli
 
 # Enable Apache modules and restart Apache
 RUN a2enmod rewrite && service apache2 restart
