@@ -34,6 +34,8 @@ services:
         environment:
             MYSQL_USER: root
             MYSQL_PASSWORD: 
-            MYSQL_ROOT_PASSWORD: 
-volumes:
-     - /var/run/docker.sock:/var/run/docker.sock
+            MYSQL_ROOT_PASSWORD:
+    php-app: 
+        image: your-php-image
+        volumes:
+            - ./path/on/host:/path/in/container
