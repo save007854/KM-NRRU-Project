@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Push the Docker image to a registry or deploy to your environment
-                    sh "docker-compose push"
+                    sh "docker-compose up -d"
                     // Add additional deployment steps as needed
                 }
             }
