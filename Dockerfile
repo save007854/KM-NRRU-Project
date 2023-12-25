@@ -1,14 +1,33 @@
 # Use an official PHP runtime as a parent image
 FROM php:7.4-apache
 
-# Set the working directory to /var/www/html
+# Set the working directory in the container
 WORKDIR /var/www/html
 
-# Copy the current directory contents into the container at /var/www/html
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y \
+        libzip-dev \
+        unzip
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql zip
+
+# Enable Apache modules
+RUN a2enmod rewrite
+
+# Copy the local code to the container
 COPY . .
 
-# Install any needed extensions
-RUN docker-php-ext-install mysqli
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Run Apache in the foreground when the container launches
+
+# Install dependencies
+RUN composer install
+
+# Expose port 80
+EXPOSE 70
+
+# Command to run on container start
 CMD ["apache2-foreground"]
