@@ -1,9 +1,9 @@
-version: "2"
+version: "3"
 services:
     www:
         build: .
         ports:
-            - "70:70"
+            - "7000:7000"
         volumes:
             - ./www:/var/www/html/
         links:
@@ -17,8 +17,8 @@ services:
         environment:
             MYSQL_DATABASE: bestpractice
             MYSQL_USER: root
-            MYSQL_PASSWORD: null
-            MYSQL_ROOT_PASSWORD: null
+            MYSQL_PASSWORD: 12345
+            MYSQL_ROOT_PASSWORD: 12345
         volumes:
             - ./slq:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
@@ -29,11 +29,11 @@ services:
         links:
             - db:db
         ports:
-            - 72:70
+            - "7270:7270"
         environment:
             MYSQL_USER: root
-            MYSQL_PASSWORD: null
-            MYSQL_ROOT_PASSWORD: null
+            MYSQL_PASSWORD: 12345
+            MYSQL_ROOT_PASSWORD: 12345
 volumes:
     persistent:
 
