@@ -10,5 +10,7 @@ COPY . .
 # Install any needed extensions
 RUN docker-php-ext-install mysqli
 
+EXPOSE 7000
+
 # Run Apache in the foreground when the container launches
 CMD ["apache2-foreground"]
