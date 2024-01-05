@@ -1,4 +1,5 @@
 version: "3"
+
 services:
     www:
         build: .
@@ -34,5 +35,6 @@ services:
             MYSQL_USER: root
             MYSQL_PASSWORD: 12345678
             MYSQL_ROOT_PASSWORD: 12345678
+
 volumes:
     persistent:
