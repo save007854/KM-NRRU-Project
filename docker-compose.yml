@@ -15,7 +15,8 @@ services:
         platform: linux/x86_64
         image: mysql:5.7
         volumes:
-            - db_data:/var/lib/mysql
+            - ./slq:/docker-entrypoint-initdb.d
+            - persistent:/var/lib/mysql
         restart: always
         ports:
             - "3306:3306"
