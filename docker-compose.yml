@@ -11,7 +11,6 @@ services:
             - db
         networks:
             - mysql-phpmyadmin
-            
     db:
         platform: linux/x86_64
         image: mysql:5.7
@@ -27,20 +26,18 @@ services:
         networks:
             - mysql-phpmyadmin
 
-    # phpmyadmin
     phpmyadmin:
         depends_on:
             - db
         image: phpmyadmin
         restart: always
         ports:
-            - "8090:80"
+            - "7070:80"
         environment:
         PMA_HOST: db
         MYSQL_ROOT_PASSWORD: password
         networks:
             - mysql-phpmyadmin
-
 networks:
     mysql-phpmyadmin:
 
