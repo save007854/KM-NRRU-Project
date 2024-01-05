@@ -22,7 +22,7 @@ services:
             - "3306:3306"
         environment:
         MYSQL_ROOT_PASSWORD: password
-        MYSQL_DATABASE: yourdb
+        MYSQL_DATABASE: save
         MYSQL_PASSWORD: password
         networks:
             - mysql-phpmyadmin
