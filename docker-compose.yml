@@ -36,7 +36,7 @@ services:
             - "7070:80"
         environment:
             MYSQL_USER: root
-            MYSQL_PASSWORD: save
-            MYSQL_ROOT_PASSWORD: save
+            MYSQL_PASSWORD: 12345678
+            MYSQL_ROOT_PASSWORD: 12345678
 volumes:
     persistent:
