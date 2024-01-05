@@ -4,45 +4,45 @@ services:
     www:
         build: .
         ports:
-            - "7070:80"
+            - "7000:80"
         volumes:
             - ./www:/var/www/html/
         links:
             - db
         networks:
-            - web-server
+            - mysql-phpmyadmin
             
     db:
+        platform: linux/x86_64
         image: mysql:5.7
-        container_name: db
-        environment:
-        MYSQL_ROOT_PASSWORD: root_password
-        MYSQL_DATABASE: bestpractice
-        MYSQL_USER: root
-        MYSQL_PASSWORD: save12345678
-        ports:
-            - "6033:3306"
         volumes:
-            - dbdata:/var/lib/mysql
-        networks:
-            - web-server
-
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: pma
-        links:
-            - db
-        environment:
-        PMA_HOST: db
-        PMA_PORT: 3306
-        PMA_ARBITRARY: 1
+            - db_data:/var/lib/mysql
         restart: always
         ports:
-            - 8082:80
+            - "3306:3306"
+        environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_DATABASE: yourdb
+        MYSQL_PASSWORD: password
+        networks:
+            - mysql-phpmyadmin
 
-volumes:
-     persistent:
+    # phpmyadmin
+    phpmyadmin:
+        depends_on:
+            - db
+        image: phpmyadmin
+        restart: always
+        ports:
+            - "8090:80"
+        environment:
+        PMA_HOST: db
+        MYSQL_ROOT_PASSWORD: password
+        networks:
+            - mysql-phpmyadmin
 
 networks:
-    web-server:
-        driver: bridge
+    mysql-phpmyadmin:
+
+volumes:
+    db_data:
