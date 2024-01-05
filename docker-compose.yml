@@ -36,6 +36,3 @@ services:
             MYSQL_ROOT_PASSWORD: save
 volumes:
     persistent:
-        networks:
-            - default
-
