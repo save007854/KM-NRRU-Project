@@ -12,17 +12,16 @@ services:
         networks:
             - web-server
     db:
-        image: mysql:8.2.0
-        ports:
-            - "3306:3306"
+        image: mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
         environment:
+            MYSQL_ROOT_PASSWORD: root_password
             MYSQL_DATABASE: bestpractice
             MYSQL_USER: root
             MYSQL_PASSWORD: save12345678
-            MYSQL_ROOT_PASSWORD: save12345678
-        volumes:
-            - ./slq:/docker-entrypoint-initdb.d
-            - persistent:/var/lib/mysql
+        ports:
+            - "3306:3306"
         networks:
             - web-server
     phpmyadmin:
