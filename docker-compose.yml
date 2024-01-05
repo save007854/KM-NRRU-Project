@@ -9,8 +9,7 @@ services:
         links:
             - db
         networks:
-            my_network:
-                ipv4_address: 172.26.0.2
+            - default
     db:
         image: mysql:8.2.0
         ports:
@@ -24,8 +23,7 @@ services:
             - ./slq:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
-            my_network:
-                ipv4_address: 172.26.0.2
+            - default
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         links:
