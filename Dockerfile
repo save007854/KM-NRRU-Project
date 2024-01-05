@@ -2,7 +2,7 @@
 FROM php:7.4-apache
 
 # Set the working directory in the container
-WORKDIR /var/www/html
+# WORKDIR /var/www/html
 
 # Install dependencies
 RUN apt-get update && \
@@ -20,10 +20,10 @@ RUN a2enmod rewrite
 COPY . .
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Expose port 80
-EXPOSE 70
+# Expose port 
+EXPOSE 80
 
 # Command to run on container start
 CMD ["apache2-foreground"]
