@@ -10,7 +10,7 @@ services:
         links:
             - db
         networks:
-            - default
+            - web-server
     db:
         image: mysql:8.2.0
         ports:
@@ -18,13 +18,13 @@ services:
         environment:
             MYSQL_DATABASE: bestpractice
             MYSQL_USER: root
-            MYSQL_PASSWORD: 12345678
-            MYSQL_ROOT_PASSWORD: 12345678
+            MYSQL_PASSWORD: save12345678
+            MYSQL_ROOT_PASSWORD: save12345678
         volumes:
             - ./slq:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
-            - default
+            - web-server
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         links:
@@ -33,8 +33,8 @@ services:
             - "7070:80"
         environment:
             MYSQL_USER: root
-            MYSQL_PASSWORD: 12345678
-            MYSQL_ROOT_PASSWORD: 12345678
+            MYSQL_PASSWORD: save12345678
+            MYSQL_ROOT_PASSWORD: save12345678
 
 volumes:
     persistent:
