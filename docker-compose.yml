@@ -8,10 +8,8 @@ services:
             - ./www:/var/www/html/
         links:
             - db
-        services:
-            www:
-                networks:
-                - web-networks
+        networks:
+            - web-networks
     db:
         image: mysql:8.2.0
         ports:
@@ -24,10 +22,8 @@ services:
         volumes:
             - ./slq:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
-        services:
-            www:
-                networks:
-                - web-networks
+        networks:
+            - web-networks
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         links:
