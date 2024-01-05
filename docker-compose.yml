@@ -10,7 +10,7 @@ services:
         links:
             - db
         networks:
-            - web-networks
+            - default
     db:
         image: mysql:8.2.0
         ports:
@@ -24,7 +24,7 @@ services:
             - ./slq:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
-            - web-networks
+            - default
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         links:
