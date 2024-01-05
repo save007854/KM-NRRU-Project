@@ -34,7 +34,7 @@ services:
             MYSQL_USER: root
             MYSQL_PASSWORD: save
             MYSQL_ROOT_PASSWORD: save
-volumes:
-    persistent:
-    networks:
-            - 172.26.0.2
+        volumes:
+            persistent:
+            networks:
+                    - 172.26.0.2
