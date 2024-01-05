@@ -3,14 +3,13 @@ services:
     www:
         build: .
         ports:
-            - "7000:7000"
+            - "7000:70"
         volumes:
             - ./www:/var/www/html/
         links:
             - db
         networks:
-            my_network:
-                ipv4_address: 172.26.0.2
+            - default
     db:
         image: mysql:8.2.0
         ports:
@@ -24,17 +23,17 @@ services:
             - ./slq:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
-            my_network:
-                ipv4_address: 172.26.0.2
+            - default
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         links:
             - db:db
         ports:
-            - "7070:7070"
+            - "7070:70"
         environment:
             MYSQL_USER: root
             MYSQL_PASSWORD: save
             MYSQL_ROOT_PASSWORD: save
 volumes:
     persistent:
+
