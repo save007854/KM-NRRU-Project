@@ -1,42 +1,35 @@
-version: "3"
+version: '3'
 
 services:
-    www:
-        build: .
-        ports:
-            - "8090:80"
-        volumes:
-            - ./www:/var/www/html/
-        links:
-            - db
-        networks:
-            - web-server
-            
-    db:
-        image: mysql:8.0
-        command: --default-authentication-plugin=mysql_native_password
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: root_password
-        ports:
-            - "3306:3306"
-        networks:
-            - web-server
+  web:
+    image: php:7.4-apache
+    volumes:
+      - ./web:/var/www/html
+    ports:
+      - "8081:80"
+    networks:
+      - php-network
 
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        links:
-            - db:db
-        ports:
-            - "8081:80"
-        environment:
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root1234
-            MYSQL_ROOT_PASSWORD: root1234
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - "8090:80"
+    networks:
+      - php-network
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=bestpractice
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=db_password
+    networks:
+      - php-network
 
 networks:
-    web-server:
-        driver: bridge
-
-volumes:
-    persistent:
+  php-network:
