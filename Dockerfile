@@ -2,7 +2,7 @@
 FROM php:7.4-apache
 
 # Set the working directory in the container
-# WORKDIR /var/www/html
+WORKDIR /var/www/html
 
 # Install dependencies
 RUN apt-get update && \
