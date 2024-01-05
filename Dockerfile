@@ -11,7 +11,7 @@ RUN apt-get update && \
         unzip
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql zip
+RUN docker-php-ext-install pdo pdo_mysql
 
 # Enable Apache modules
 RUN a2enmod rewrite
@@ -20,7 +20,7 @@ RUN a2enmod rewrite
 COPY . .
 
 # Install Composer
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Expose port 
 EXPOSE 80
