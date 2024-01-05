@@ -36,5 +36,9 @@ services:
             MYSQL_PASSWORD: save12345678
             MYSQL_ROOT_PASSWORD: save12345678
 
+networks:
+    web-server:
+        driver: bridge
+
 volumes:
     persistent:
