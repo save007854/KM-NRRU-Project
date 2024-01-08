@@ -22,8 +22,8 @@ COPY . .
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Expose port 80
-EXPOSE 70
+# Expose port 
+EXPOSE 80
 
 # Command to run on container start
 CMD ["apache2-foreground"]
