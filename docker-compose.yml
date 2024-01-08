@@ -14,7 +14,7 @@ services:
             - mynetwork
 
     nextcloud:
-        image: nextcloud:apache
+        image: nextcloud:latest
         env_file:
             - pi.env
         restart: always
