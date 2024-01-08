@@ -1,39 +1,51 @@
 version: "3"
+
 services:
-    www:
-        build: .
-        ports:
-            - "7000:70"
-        volumes:
-            - ./www:/var/www/html/
-        links:
-            - db
-        networks:
-            - default
+
     db:
-        image: mysql:8.2.0
-        ports:
-            - "3306:3306"
-        environment:
-            MYSQL_DATABASE: bestpractice
-            MYSQL_USER: root
-            MYSQL_PASSWORD: save
-            MYSQL_ROOT_PASSWORD: save
+        image: mariadb
+        env_file:
+        - pi.env
+        command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+        restart: always
         volumes:
-            - ./slq:/docker-entrypoint-initdb.d
-            - persistent:/var/lib/mysql
+        - ${BASE_PATH}/db:/var/lib/mysql
         networks:
-            - default
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        links:
-            - db:db
+            - mynetwork
+
+    nextcloud:
+        image: nextcloud:apache
+        env_file:
+            - pi.env
+        restart: always
         ports:
-            - "7070:70"
+             - 8081:80
+        volumes: 
+            - ${BASE_PATH}/www:/var/www
+        depends_on:
+            - db
         environment:
-            MYSQL_USER: root
-            MYSQL_PASSWORD: save
-            MYSQL_ROOT_PASSWORD: save
+            - MYSQL_DATABASE=db
+            - MYSQL_USER=${DB_USER}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD
+        networks:
+            - mynetwork
+
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        hostname: phpmyadmin
+        ports:
+            - 8090:80
+        environment:
+            - PMA_HOST=db
+        networks:
+            - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
 volumes:
     persistent:
-
