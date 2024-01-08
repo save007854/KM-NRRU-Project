@@ -9,7 +9,7 @@ services:
         command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
         restart: always
         volumes:
-        - ${BASE_PATH}/db:/var/lib/mysql
+        - db:/var/lib/mysql
         networks:
             - mynetwork
 
@@ -21,13 +21,13 @@ services:
         ports:
              - 8081:80
         volumes: 
-            - ${BASE_PATH}/www:/var/www
+            - www:/var/www/html
         depends_on:
             - db
         environment:
             - MYSQL_DATABASE=db
-            - MYSQL_USER=${DB_USER}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_USER=phpmyadmin
+            - MYSQL_PASSWORD=P@ssword
             - MYSQL_ROOT_PASSWORD
         networks:
             - mynetwork
