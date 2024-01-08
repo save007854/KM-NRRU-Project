@@ -9,7 +9,7 @@ services:
             - ./schema:/docker-entrypoint-initdb.d
         environment:
             - TZ=Asia/Bangkok
-            - MYSQL_ROOT_PASSWORD=123456
+            - MYSQL_ROOT_PASSWORD=12345678
             - "MYSQL_ROOT_HOST=%"
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
@@ -18,21 +18,29 @@ services:
             - 8090:80
         environment:
             - PMA_HOST=mariadb
-    www:
-        build: .
+    webserver:
+        image: nginx:latest  # หรือเลือกเซิร์ฟเวอร์ที่คุณต้องการใช้
         ports:
-            - "8070:80"
+            - 8070:80
         volumes:
-            - ./www:/var/www/html/
-        links:
+            - ./www:/var/www/html  # เปลี่ยนตามโครงสร้างโฟลเดอร์ของคุณ
+        depends_on:
+            - php
+        networks:
+            - mynetwork
+
+    php:
+        image: php:latest  # หรือเลือกเวอร์ชันที่คุณต้องการใช้
+        volumes:
+            - ./www:/var/www/html  # เปลี่ยนตามโครงสร้างโฟลเดอร์ของคุณ
+        depends_on:
             - mariadb
         networks:
-            - web-server
-            
+            - mynetwork
 
 networks:
-    web-server:
-        driver: bridge
+  mynetwork:
+    driver: bridge
 
 volumes:
     persistent:
