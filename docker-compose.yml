@@ -12,27 +12,18 @@ services:
         networks:
             - web-server
             
-    db:
-        image: mysql:8.0
-        command: --default-authentication-plugin=mysql_native_password
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: root_password
-        ports:
-            - "3306:3306"
-        networks:
-            - web-server
-
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        links:
-            - db:db
-        ports:
-            - "8081:80"
-        environment:
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root1234
-            MYSQL_ROOT_PASSWORD: root1234
+    mariadb:
+    image: mariadb:10
+    hostname: mariadb
+    volumes:
+      - ./mariadb:/var/lib/mysql
+      - ./schema:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    environment:
+      - TZ=Asia/Bangkok
+      - MYSQL_ROOT_PASSWORD=12345678
+      - "MYSQL_ROOT_HOST=%"
 
 networks:
     web-server:
