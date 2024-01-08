@@ -4,26 +4,37 @@ services:
     www:
         build: .
         ports:
-            - "8090:80"
+            - "8070:80"
         volumes:
             - ./www:/var/www/html/
         links:
-            - db
+            - mariadb
         networks:
             - web-server
             
     mariadb:
-    image: mariadb:10
-    hostname: mariadb
-    volumes:
-      - ./mariadb:/var/lib/mysql
-      - ./schema:/docker-entrypoint-initdb.d
-    ports:
-      - 3306:3306
-    environment:
-      - TZ=Asia/Bangkok
-      - MYSQL_ROOT_PASSWORD=12345678
-      - "MYSQL_ROOT_HOST=%"
+        image: mariadb:10
+        hostname: mariadb
+        volumes:
+            - ./mariadb:/var/lib/mysql
+            - ./schema:/docker-entrypoint-initdb.d
+        ports:
+            - 3306:3306
+        environment:
+            - TZ=Asia/Bangkok
+            - MYSQL_ROOT_PASSWORD=12345678
+            - "MYSQL_ROOT_HOST=%"
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - mariadb:mariadb
+        ports:
+            - "8090:80"
+        environment:
+            MYSQL_USER: root
+            MYSQL_PASSWORD: 12345678
+            MYSQL_ROOT_PASSWORD: 12345678
 
 networks:
     web-server:
