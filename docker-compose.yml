@@ -13,21 +13,22 @@ services:
             - pi.env
 
     nextcloud:
-        image: nextcloud:latest
-        env_file:
-            - pi.env
+        image: nextcloud:apache
         restart: always
-        ports:
-             - 8081:80
+        container_name: nextcloud
         volumes: 
             - www:/var/www/html
+        environment:
+            - VIRTUAL_HOST=${VIRTUAL_HOST}
+            - LETSENCRYPT_HOST=${VIRTUAL_HOST}
+            - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+            - MYSQL_HOST=db
+            - NEXTCLOUD_TRUSTED_DOMAINS=${VIRTUAL_HOST}
+            - NEXTCLOUD_TRUSTED_DOMAINS=proxy
+        env_file:
+            - pi.env
         depends_on:
             - db
-        environment:
-            - MYSQL_DATABASE=db
-            - MYSQL_USER=phpmyadmin
-            - MYSQL_PASSWORD=P@ssword
-            - MYSQL_ROOT_PASSWORD
         networks:
             - mynetwork
 
