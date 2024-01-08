@@ -3,15 +3,14 @@ version: "3"
 services:
 
     db:
-        image: mariadb
-        env_file:
-        - pi.env
+        image: jsurf/rpi-mariadb
         command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
         restart: always
+
         volumes:
-        - db:/var/lib/mysql
-        networks:
-            - mynetwork
+            - db:/var/lib/mysql
+        env_file:
+            - pi.env
 
     nextcloud:
         image: nextcloud:latest
