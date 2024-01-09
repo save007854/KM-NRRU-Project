@@ -17,7 +17,7 @@ services:
         restart: always
         container_name: nextcloud
         volumes: 
-            - www:/var/www/html
+            - db:/var/www/html
         environment:
             - VIRTUAL_HOST=${VIRTUAL_HOST}
             - LETSENCRYPT_HOST=${VIRTUAL_HOST}
